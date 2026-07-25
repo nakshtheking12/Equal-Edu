@@ -1459,3 +1459,16 @@ dialog::backdrop {
     animation: none !important;
   }
 }
+
+#lessonTopicselect {
+  margin-top: 0;
+  margin-bottom: 12px;
+}
+
+body.focus-mode #lesson-topic-select,
+.focus-mode-active #lesson-topic-select {
+  margin-top: 0;
+  position: relative; /* Or absolute, depending on your layout structure */
+  top: 0;
+  flex-wrap: wrap;
+}
