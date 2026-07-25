@@ -42,15 +42,25 @@ if (firebaseConfigured) {
 const $ = id => document.getElementById(id);
 const $$ = selector => [...document.querySelectorAll(selector)];
 
+function escapeHtml(str) {
+  return String(str).replace(/[&<>"']/g, match => ({
+    '&': '&amp;',
+    '<': '&lt;',
+    '>': '&gt;',
+    '"': '&quot;',
+    "'": '&#39;'
+  })[match]);
+}
+
 /* i18n DICTIONARY FOR LANGUAGE SWITCHER */
 const translations = {
   en: {
     hero_title: "Turn every chapter into an interactive learning journey.",
     hero_copy: "Upload study material, generate scalable notes, revise with flashcards, discuss with classmates and ask teachers for help.",
     auth_title: "Create your learning profile",
-    btn_create: "Create account",
+    btn_create: "Create Account",
     btn_switch: "Already registered? Sign in",
-    btn_demo: "Continue in demo mode",
+    btn_demo: "Continue in Demo Mode",
     nav_dashboard: "Dashboard",
     nav_lesson: "Smart Lesson",
     nav_pdf: "PDF Studio",
@@ -58,25 +68,25 @@ const translations = {
     nav_community: "Community",
     nav_doubt: "Doubt Room",
     nav_planner: "Study Planner",
-    action_course: "Change course",
-    action_profile: "Edit profile",
-    action_logout: "Log out",
+    action_course: "Change Course",
+    action_profile: "Edit Profile",
+    action_logout: "Log Out",
     dash_welcome: "Ready to make progress",
     dash_welcome_sub: "Continue your course, process a chapter, or help a classmate in the community.",
-    dash_upload_btn: "Upload today's chapter",
+    dash_upload_btn: "Upload Today's Chapter",
     dash_xp: "XP earned",
-    stat_current_course: "Current course",
-    stat_pdf_words: "PDF words studied",
+    stat_current_course: "Current Course",
+    stat_pdf_words: "PDF Words Studied",
     stat_flashcards: "Flashcards",
-    stat_tasks: "Tasks completed",
-    panel_toolkit: "Learning toolkit",
-    panel_sprint: "25-minute timer",
+    stat_tasks: "Tasks Completed",
+    panel_toolkit: "Learning Toolkit",
+    panel_sprint: "25-minute Timer",
     btn_start: "Start",
     btn_pause: "Pause",
     btn_reset: "Reset",
     lesson_hub_eyebrow: "COURSE HUB",
     lesson_hub_sub: "Choose a lesson topic and start learning.",
-    btn_read_aloud: "Read aloud",
+    btn_read_aloud: "Read Aloud",
     btn_stop: "Stop",
     pdf_studio_eyebrow: "PDF STUDIO",
     pdf_studio_title: "Notes that grow with the document",
@@ -86,9 +96,9 @@ const translations = {
     hero_title: "Convierte cada capítulo en un viaje de aprendizaje interactivo.",
     hero_copy: "Sube material de estudio, genera notas escalables, repasa con fichas, debate con compañeros y pide ayuda a los profesores.",
     auth_title: "Crea tu perfil de aprendizaje",
-    btn_create: "Crear cuenta",
+    btn_create: "Crear Cuenta",
     btn_switch: "¿Ya estás registrado? Inicia sesión",
-    btn_demo: "Continuar en modo demostración",
+    btn_demo: "Continuar en Modo Demostración",
     nav_dashboard: "Panel Principal",
     nav_lesson: "Lección Inteligente",
     nav_pdf: "Estudio PDF",
@@ -96,25 +106,25 @@ const translations = {
     nav_community: "Comunidad",
     nav_doubt: "Sala de Dudas",
     nav_planner: "Planificador",
-    action_course: "Cambiar curso",
-    action_profile: "Editar perfil",
-    action_logout: "Cerrar sesión",
+    action_course: "Cambiar Curso",
+    action_profile: "Editar Perfil",
+    action_logout: "Cerrar Sesión",
     dash_welcome: "Listo para progresar",
     dash_welcome_sub: "Continúa tu curso, procesa un capítulo o ayuda a un compañero.",
     dash_upload_btn: "Sube el capítulo de hoy",
     dash_xp: "XP ganado",
-    stat_current_course: "Curso actual",
-    stat_pdf_words: "Palabras PDF estudiadas",
+    stat_current_course: "Curso Actual",
+    stat_pdf_words: "Palabras PDF Estudiadas",
     stat_flashcards: "Tarjetas",
-    stat_tasks: "Tareas completadas",
-    panel_toolkit: "Herramientas de aprendizaje",
+    stat_tasks: "Tareas Completadas",
+    panel_toolkit: "Herramientas de Aprendizaje",
     panel_sprint: "Temporizador de 25 min",
     btn_start: "Iniciar",
     btn_pause: "Pausa",
     btn_reset: "Reiniciar",
     lesson_hub_eyebrow: "CENTRO DE CURSOS",
     lesson_hub_sub: "Elige un tema de lección y comienza a aprender.",
-    btn_read_aloud: "Leer en voz alta",
+    btn_read_aloud: "Leer en Voz Alta",
     btn_stop: "Detener",
     pdf_studio_eyebrow: "ESTUDIO PDF",
     pdf_studio_title: "Notas que crecen con el documento",
@@ -162,35 +172,35 @@ const translations = {
     hero_title: "Transformez chaque chapitre en un voyage d'apprentissage interactif.",
     hero_copy: "Téléchargez des documents, générez des notes évolutives, révisez avec des cartes mémoire et posez des questions aux enseignants.",
     auth_title: "Créez votre profil d'apprentissage",
-    btn_create: "Créer un compte",
+    btn_create: "Créer un Compte",
     btn_switch: "Déjà inscrit ? Connexion",
-    btn_demo: "Continuer en mode démo",
+    btn_demo: "Continuer en Mode Démo",
     nav_dashboard: "Tableau de bord",
-    nav_lesson: "Leçon intelligente",
+    nav_lesson: "Leçon Intelligente",
     nav_pdf: "Studio PDF",
-    nav_flashcards: "Cartes mémoire",
+    nav_flashcards: "Cartes Mémoire",
     nav_community: "Communauté",
-    nav_doubt: "Salle de questions",
+    nav_doubt: "Salle de Questions",
     nav_planner: "Planificateur",
-    action_course: "Changer de cours",
-    action_profile: "Modifier le profil",
+    action_course: "Changer de Cours",
+    action_profile: "Modifier le Profil",
     action_logout: "Déconnexion",
     dash_welcome: "Prêt à progresser",
     dash_welcome_sub: "Continuez votre cours, traitez un chapitre ou aidez un camarade.",
-    dash_upload_btn: "Télécharger le chapitre",
+    dash_upload_btn: "Télécharger le Chapitre",
     dash_xp: "XP gagné",
-    stat_current_course: "Cours actuel",
-    stat_pdf_words: "Mots PDF étudiés",
-    stat_flashcards: "Cartes mémoire",
-    stat_tasks: "Tâches terminées",
-    panel_toolkit: "Outils d'apprentissage",
+    stat_current_course: "Cours Actuel",
+    stat_pdf_words: "Mots PDF Étudiés",
+    stat_flashcards: "Cartes Mémoire",
+    stat_tasks: "Tâches Terminées",
+    panel_toolkit: "Outils d'Apprentissage",
     panel_sprint: "Minuteur de 25 min",
     btn_start: "Démarrer",
     btn_pause: "Pause",
     btn_reset: "Réinitialiser",
     lesson_hub_eyebrow: "CENTRE DE COURS",
     lesson_hub_sub: "Choisissez un sujet de leçon et commencez à apprendre.",
-    btn_read_aloud: "Lire à voix haute",
+    btn_read_aloud: "Lire à Voix Haute",
     btn_stop: "Arrêter",
     pdf_studio_eyebrow: "STUDIO PDF",
     pdf_studio_title: "Des notes qui grandissent avec le document",
@@ -208,17 +218,35 @@ const state = {
     email: "demo@equaledu.local",
     role: "student",
     course: "Science",
-    bio: ""
+    bio: "",
+    xp: 240
   },
   cards: [],
   filteredCards: [],
   cardIndex: 0,
   cardFlipped: false,
   pdfText: "",
+  wordsStudiedCount: 0,
   timerSeconds: 1500,
   timerId: null,
   tasks: JSON.parse(localStorage.getItem("equaleduTasks") || "[]"),
   lang: localStorage.getItem("equaleduLang") || "en"
+};
+
+// Local storage for demo chats so chat works smoothly in Demo Mode
+const demoChats = {
+  community: {
+    "Science": [
+      { id: "c1", sender: "Dr. Smith", role: "teacher", text: "Welcome to the Science Community! Feel free to discuss topics here.", time: "10:00 AM" },
+      { id: "c2", sender: "Alex", role: "student", text: "Hi everyone! Excited to study plant nutrition today.", time: "10:02 AM" }
+    ]
+  },
+  doubt: {
+    "Science": [
+      { id: "d1", sender: "Alex", role: "student", text: "Can someone clarify the difference between xylem and phloem?", time: "10:05 AM" },
+      { id: "d2", sender: "Dr. Smith", role: "teacher", text: "Xylem transports water and minerals from roots; phloem transports food made in leaves!", time: "10:08 AM" }
+    ]
+  }
 };
 
 const lessons = {
@@ -1436,837 +1464,829 @@ const lessons = {
   }
 };
 
-function toast(message) {
-  $("toast").textContent = message;
-  $("toast").classList.add("show");
-  clearTimeout(toast.timer);
-  toast.timer = setTimeout(() => $("toast").classList.remove("show"), 3200);
+/* TOAST MESSAGES */
+function showToast(message, type = "info") {
+  const toast = $("toast");
+  if (!toast) return;
+  toast.textContent = message;
+  toast.className = `toast visible ${type}`;
+  setTimeout(() => {
+    toast.className = "toast";
+  }, 3500);
 }
 
-function safeText(value) {
-  return String(value ?? "").replace(/[&<>"']/g, char => ({
-    "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#039;"
-  })[char]);
+/* INITIALIZATION */
+document.addEventListener("DOMContentLoaded", () => {
+  setupEventListeners();
+  applyLanguage(state.lang);
+  updateAuthUI();
+
+  if (firebaseConfigured && auth) {
+    onAuthStateChanged(auth, async (user) => {
+      if (user) {
+        state.demo = false;
+        state.user = user;
+        await loadUserProfile(user.uid);
+        showAppView();
+      } else {
+        if (!state.demo) showAuthView();
+      }
+    });
+  } else {
+    state.demo = true;
+    $("firebaseStatus").textContent = "Demo Mode is active. Data changes will persist during this session.";
+  }
+});
+
+/* AUTH MODE SWITCHING */
+function toggleAuthMode() {
+  state.authMode = state.authMode === "signup" ? "login" : "signup";
+  updateAuthUI();
 }
 
-function applyLanguage(lang) {
-  state.lang = lang;
-  localStorage.setItem("equaleduLang", lang);
-  const dict = translations[lang] || translations.en;
+function updateAuthUI() {
+  const isSignup = state.authMode === "signup";
   
-  $$("[data-i18n]").forEach(el => {
-    const key = el.dataset.i18n;
-    if (dict[key]) {
-      el.textContent = dict[key];
-    }
+  if ($("authTitle")) {
+    $("authTitle").textContent = isSignup ? "Create your learning profile" : "Sign in to EqualEdu";
+  }
+  if ($("authSubmit")) {
+    $("authSubmit").textContent = isSignup ? "Create Account" : "Sign In";
+  }
+  if ($("authSwitch")) {
+    $("authSwitch").textContent = isSignup ? "Already registered? Sign in" : "Need an account? Sign up";
+  }
+  
+  if ($("nameLabel")) $("nameLabel").style.display = isSignup ? "block" : "none";
+  if ($("signupFields")) $("signupFields").style.display = isSignup ? "block" : "none";
+}
+
+/* EVENT LISTENERS SETUP */
+function setupEventListeners() {
+  // Auth Form
+  $("authSwitch")?.addEventListener("click", toggleAuthMode);
+  $("authForm")?.addEventListener("submit", handleAuthSubmit);
+  $("demoLogin")?.addEventListener("click", startDemoMode);
+  $("logoutBtn")?.addEventListener("click", handleLogout);
+
+  // Navigation
+  $$(".nav-btn, [data-open-page]").forEach(btn => {
+    btn.addEventListener("click", (e) => {
+      const pageId = btn.getAttribute("data-page") || btn.getAttribute("data-open-page");
+      if (pageId) switchPage(pageId);
+    });
   });
 
-  if (!$("appView").classList.contains("hidden")) {
-    renderLessonTopics();
-    renderLesson();
+  // Dialog Modals
+  $("editProfileBtn")?.addEventListener("click", () => openDialog("profileDialog"));
+  $("changeCourseBtn")?.addEventListener("click", () => openDialog("courseDialog"));
+  $("profileShortcut")?.addEventListener("click", () => openDialog("profileDialog"));
+  $("a11yBtn")?.addEventListener("click", () => openDialog("a11yDialog"));
+
+  $$("[data-close-dialog]").forEach(btn => {
+    btn.addEventListener("click", () => closeDialog(btn.getAttribute("data-close-dialog")));
+  });
+
+  $("profileForm")?.addEventListener("submit", handleProfileSave);
+  $("courseForm")?.addEventListener("submit", handleCourseChange);
+  $("a11yForm")?.addEventListener("submit", handleA11ySave);
+
+  // Focus & Accessibility Mode Toggles
+  $("focusModeBtn")?.addEventListener("click", toggleFocusMode);
+  $("exitFocusBtn")?.addEventListener("click", toggleFocusMode);
+  $("themeBtn")?.addEventListener("click", toggleDarkMode);
+
+  // Focus Sprint Timer
+  $("timerStart")?.addEventListener("click", startTimer);
+  $("timerPause")?.addEventListener("click", pauseTimer);
+  $("timerReset")?.addEventListener("click", resetTimer);
+
+  // Lesson Audio Speech
+  $("speakLessonBtn")?.addEventListener("click", speakLessonText);
+  $("pauseAudioBtn")?.addEventListener("click", () => window.speechSynthesis?.pause());
+  $("stopAudioBtn")?.addEventListener("click", () => window.speechSynthesis?.cancel());
+
+  // PDF Upload Handlers
+  const pdfDropzone = $("pdfDropzone");
+  const pdfInput = $("pdfInput");
+
+  pdfDropzone?.addEventListener("click", () => pdfInput?.click());
+  pdfDropzone?.addEventListener("dragover", (e) => e.preventDefault());
+  pdfDropzone?.addEventListener("drop", (e) => {
+    e.preventDefault();
+    if (e.dataTransfer.files?.length) processPdfFile(e.dataTransfer.files[0]);
+  });
+  pdfInput?.addEventListener("change", (e) => {
+    if (e.target.files?.length) processPdfFile(e.target.files[0]);
+  });
+
+  // Flashcards Navigation
+  $("flashcard")?.addEventListener("click", () => {
+    state.cardFlipped = !state.cardFlipped;
+    $("flashcard").classList.toggle("flipped", state.cardFlipped);
+  });
+  $("nextCardBtn")?.addEventListener("click", () => navigateCard(1));
+  $("prevCardBtn")?.addEventListener("click", () => navigateCard(-1));
+  $("shuffleCardsBtn")?.addEventListener("click", shuffleCards);
+  $("resetCardsBtn")?.addEventListener("click", renderFlashcards);
+  $("flashcardSearch")?.addEventListener("input", (e) => filterFlashcards(e.target.value));
+
+  // Chat Forms
+  $("communityForm")?.addEventListener("submit", handleCommunitySubmit);
+  $("doubtForm")?.addEventListener("submit", handleDoubtSubmit);
+
+  // Study Planner
+  $("taskForm")?.addEventListener("submit", handleTaskAdd);
+
+  // Reading Guide mouse movement tracking
+  document.addEventListener("mousemove", (e) => {
+    const guide = $("readingGuide");
+    if (guide && !guide.classList.contains("hidden")) {
+      guide.style.top = `${e.clientY - 15}px`;
+    }
+  });
+}
+
+/* AUTHENTICATION HANDLERS */
+async function handleAuthSubmit(e) {
+  e.preventDefault();
+  const email = $("authEmail").value.trim();
+  const password = $("authPassword").value;
+  const name = $("authName").value.trim() || "Learner";
+  const role = $("authRole").value;
+  const course = $("authCourse").value;
+
+  if (state.demo || !auth) {
+    state.profile = {
+      uid: "demo-user",
+      name: name,
+      email: email,
+      role: role,
+      course: course,
+      bio: "Demo Mode Account",
+      xp: 240
+    };
+    showToast("Signed in using Demo Mode", "success");
+    showAppView();
+    return;
+  }
+
+  try {
+    if (state.authMode === "signup") {
+      const res = await createUserWithEmailAndPassword(auth, email, password);
+      await updateProfile(res.user, { displayName: name });
+      const newProfile = { uid: res.user.uid, name, email, role, course, bio: "", xp: 240 };
+      await setDoc(doc(db, "users", res.user.uid), newProfile);
+      state.profile = newProfile;
+      showToast("Account created successfully!", "success");
+    } else {
+      const res = await signInWithEmailAndPassword(auth, email, password);
+      await loadUserProfile(res.user.uid);
+      showToast("Logged in successfully!", "success");
+    }
+    showAppView();
+  } catch (err) {
+    showToast(err.message, "error");
   }
 }
 
-function saveProfileLocal() {
-  localStorage.setItem("equaleduProfile", JSON.stringify(state.profile));
+function startDemoMode() {
+  state.demo = true;
+  state.profile = {
+    uid: "demo-user",
+    name: "Demo Learner",
+    email: "demo@equaledu.local",
+    role: "student",
+    course: "Science",
+    bio: "Demo Mode Active",
+    xp: 240
+  };
+  showToast("Entered Demo Mode with 240 starting XP!", "info");
+  showAppView();
 }
 
-function loadDemoProfile() {
-  const stored = JSON.parse(localStorage.getItem("equaleduProfile") || "null");
-  if (stored) state.profile = { ...state.profile, ...stored };
+async function loadUserProfile(uid) {
+  try {
+    const docRef = doc(db, "users", uid);
+    const snap = await getDoc(docRef);
+    if (snap.exists()) {
+      state.profile = { xp: 240, ...snap.data() };
+    } else {
+      state.profile = {
+        uid,
+        name: auth.currentUser?.displayName || "Learner",
+        email: auth.currentUser?.email,
+        role: "student",
+        course: "Science",
+        bio: "",
+        xp: 240
+      };
+      await setDoc(docRef, state.profile);
+    }
+  } catch (e) {
+    console.error("Error loading profile:", e);
+  }
 }
 
-function showApp() {
-  $("authView").classList.add("hidden");
-  $("appView").classList.remove("hidden");
+function handleLogout() {
+  if (auth && !state.demo) {
+    signOut(auth);
+  }
+  state.user = null;
+  showAuthView();
+  showToast("Logged out.", "info");
+}
+
+/* UI VIEW SWITCHING */
+function showAuthView() {
+  $("authView")?.classList.remove("hidden");
+  $("appView")?.classList.add("hidden");
+}
+
+function showAppView() {
+  $("authView")?.classList.add("hidden");
+  $("appView")?.classList.remove("hidden");
   updateProfileUI();
-  renderLessonTopics();
   renderLesson();
-  renderTasks();
-  renderFlashcard();
-  loadChats();
+  setupCommunityChat();
+  setupDoubtChat();
+  renderPlannerTasks();
+  switchPage("dashboardPage");
 }
 
-function showAuth() {
-  $("appView").classList.add("hidden");
-  $("authView").classList.remove("hidden");
+function switchPage(pageId) {
+  $$(".page").forEach(p => p.classList.remove("active"));
+  $$(".nav-btn").forEach(b => b.classList.remove("active"));
+
+  const targetPage = $(pageId);
+  if (targetPage) targetPage.classList.add("active");
+
+  const navBtn = $$(`.nav-btn[data-page="${pageId}"]`)[0];
+  if (navBtn) navBtn.classList.add("active");
+
+  const titleEl = $("pageTitle");
+  if (titleEl && navBtn) {
+    titleEl.textContent = navBtn.querySelector("span")?.textContent || "Dashboard";
+  }
+
+  if (pageId === "communityPage") setupCommunityChat();
+  if (pageId === "doubtPage") setupDoubtChat();
 }
 
+/* PROFILE & UI RENDERING */
 function updateProfileUI() {
   const p = state.profile;
   const initial = (p.name || "L").charAt(0).toUpperCase();
-  $("avatarInitial").textContent = initial;
-  $("headerAvatar").textContent = initial;
-  $("sidebarName").textContent = p.name;
-  $("headerName").textContent = p.name.split(" ")[0];
-  
-  const heroNameEl = $("heroName");
-  if(heroNameEl) heroNameEl.textContent = p.name.split(" ")[0];
 
-  $("sidebarMeta").textContent = `${capitalize(p.role)} • ${p.course}`;
-  $("dashboardCourse").textContent = p.course;
-  $("communityCourseBadge").textContent = `${p.course} room`;
-  $("roleBadge").textContent = `${capitalize(p.role)} view`;
-  $("profileName").value = p.name;
-  $("profileRole").value = p.role;
-  $("profileBio").value = p.bio || "";
-  $("courseSelect").value = p.course;
+  if ($("sidebarName")) $("sidebarName").textContent = p.name;
+  if ($("sidebarMeta")) $("sidebarMeta").textContent = `${p.role.toUpperCase()} • ${p.course}`;
+  if ($("heroName")) $("heroName").textContent = p.name;
+  if ($("headerName")) $("headerName").textContent = p.name;
+  if ($("avatarInitial")) $("avatarInitial").textContent = initial;
+  if ($("headerAvatar")) $("headerAvatar").textContent = initial;
+  if ($("dashboardCourse")) $("dashboardCourse").textContent = p.course;
+  if ($("xpValue")) $("xpValue").textContent = p.xp || 240;
+
+  if ($("profileName")) $("profileName").value = p.name;
+  if ($("profileRole")) $("profileRole").value = p.role;
+  if ($("profileBio")) $("profileBio").value = p.bio || "";
+  if ($("courseSelect")) $("courseSelect").value = p.course;
 }
 
-function capitalize(value) {
-  return value.charAt(0).toUpperCase() + value.slice(1);
+function openDialog(id) {
+  const dialog = $(id);
+  if (dialog) dialog.showModal();
 }
 
-function setAuthMode(mode) {
-  state.authMode = mode;
-  const signup = mode === "signup";
-  $("authTitle").textContent = signup ? "Create your learning profile" : "Welcome back";
-  $("authSubmit").textContent = signup ? "Create account" : "Sign in";
-  $("authSwitch").textContent = signup ? "Already registered? Sign in" : "New learner? Create account";
-  $("nameLabel").classList.toggle("hidden", !signup);
-  $("signupFields").classList.toggle("hidden", !signup);
-  applyLanguage(state.lang);
+function closeDialog(id) {
+  const dialog = $(id);
+  if (dialog) dialog.close();
 }
 
-async function handleAuthSubmit(event) {
-  event.preventDefault();
-  if (!firebaseConfigured || !auth || !db) {
-    toast("Firebase is not configured. Use Demo mode or paste your Firebase config.");
-    return;
-  }
+async function handleProfileSave(e) {
+  e.preventDefault();
+  state.profile.name = $("profileName").value.trim() || state.profile.name;
+  state.profile.role = $("profileRole").value;
+  state.profile.bio = $("profileBio").value.trim();
 
-  const email = $("authEmail").value.trim();
-  const password = $("authPassword").value;
-  try {
-    if (state.authMode === "signup") {
-      const credential = await createUserWithEmailAndPassword(auth, email, password);
-      const profile = {
-        uid: credential.user.uid,
-        name: $("authName").value.trim() || "Learner",
-        email,
-        role: $("authRole").value,
-        course: $("authCourse").value,
-        bio: "",
-        createdAt: serverTimestamp()
-      };
-      await updateProfile(credential.user, { displayName: profile.name });
-      await setDoc(doc(db, "users", credential.user.uid), profile);
-    } else {
-      await signInWithEmailAndPassword(auth, email, password);
-    }
-  } catch (error) {
-    console.error(error);
-    toast(error.message.replace("Firebase:", "").trim());
-  }
-}
-
-async function loadFirebaseProfile(user) {
-  const snapshot = await getDoc(doc(db, "users", user.uid));
-  if (snapshot.exists()) {
-    state.profile = { ...snapshot.data(), uid: user.uid, email: user.email };
-  } else {
-    state.profile = {
-      uid: user.uid,
-      name: user.displayName || "Learner",
-      email: user.email,
-      role: "student",
-      course: "Science",
-      bio: ""
-    };
-    await setDoc(doc(db, "users", user.uid), state.profile);
-  }
-}
-
-function openPage(pageId) {
-  $$(".page").forEach(page => page.classList.toggle("active", page.id === pageId));
-  $$(".nav-btn").forEach(btn => btn.classList.toggle("active", btn.dataset.page === pageId));
-  const button = $(`.nav-btn[data-page="${pageId}"]`);
-  $("pageTitle").textContent = button?.innerText.trim() || "EqualEdu";
-  $("mainContent").focus();
-  if (pageId === "communityPage" || pageId === "doubtPage") loadChats();
-}
-
-function getNormalizedCourseKey(courseName) {
-  const map = {
-    "Science": "science",
-    "Mathematics": "mathematics",
-    "Social Science": "social_science",
-    "English": "english",
-    "Computer Science": "computer_science",
-    "Environmental Studies": "environmental_studies"
-  };
-  return map[courseName] || "science";
-}
-
-function currentLesson() {
-  const courseKey = getNormalizedCourseKey(state.profile.course);
-  const courseObj = lessons[courseKey] || lessons.science;
-  const langList = courseObj[state.lang] || courseObj.en || lessons.science.en;
-  const selectedIndex = Number($("lessonTopicSelect")?.value || 0);
-  return langList[selectedIndex] || langList[0];
-}
-
-function renderLessonTopics() {
-  const courseKey = getNormalizedCourseKey(state.profile.course);
-  const courseObj = lessons[courseKey] || lessons.science;
-  const langList = courseObj[state.lang] || courseObj.en || lessons.science.en;
-
-  const selectEl = $("lessonTopicSelect");
-  if (!selectEl) return;
-
-  selectEl.innerHTML = langList.map((lesson, index) =>
-    `<option value="${index}">${safeText(lesson.title)}</option>`
-  ).join("");
-}
-
-function renderLesson() {
-  const lesson = currentLesson();
-  if(!lesson) return;
-  
-  $("lessonHeading").textContent = lesson.title;
-  $("lessonSubheading").textContent = lesson.intro || "";
-  $("lessonBody").innerHTML = `
-    <h2>${safeText(lesson.title)}</h2>
-    <p>${safeText(lesson.intro || "")}</p>
-    ${(lesson.blocks || []).map((block, index) => `<div class="lesson-block"><b>${index + 1}.</b> ${safeText(block)}</div>`).join("")}
-  `;
-  $("lessonKeywords").innerHTML = (lesson.keywords || []).map(word => `<span>${safeText(word)}</span>`).join("");
-  if (lesson.quiz) {
-    renderQuickCheck(lesson.quiz);
-  }
-  addLessonCards(lesson);
-}
-
-function renderQuickCheck(quiz) {
-  $("quickCheck").innerHTML = `
-    <p><strong>${safeText(quiz.question)}</strong></p>
-    ${quiz.options.map((option, index) => `<button class="quiz-option" data-option="${index}">${safeText(option)}</button>`).join("")}
-  `;
-  $$("#quickCheck .quiz-option").forEach(button => {
-    button.addEventListener("click", () => {
-      const chosen = Number(button.dataset.option);
-      $$("#quickCheck .quiz-option").forEach((item, index) => {
-        item.disabled = true;
-        if (index === quiz.answer) item.classList.add("correct");
-      });
-      if (chosen !== quiz.answer) button.classList.add("wrong");
-      toast(chosen === quiz.answer ? "Correct!" : "Review the highlighted answer.");
+  if (!state.demo && db && state.user) {
+    await updateDoc(doc(db, "users", state.user.uid), {
+      name: state.profile.name,
+      role: state.profile.role,
+      bio: state.profile.bio
     });
+  }
+  updateProfileUI();
+  closeDialog("profileDialog");
+  showToast("Profile updated!", "success");
+}
+
+async function handleCourseChange(e) {
+  e.preventDefault();
+  const newCourse = $("courseSelect").value;
+  state.profile.course = newCourse;
+
+  if (!state.demo && db && state.user) {
+    await updateDoc(doc(db, "users", state.user.uid), { course: newCourse });
+  }
+  updateProfileUI();
+  renderLesson();
+  setupCommunityChat();
+  setupDoubtChat();
+  closeDialog("courseDialog");
+  showToast(`Switched course to ${newCourse}`, "info");
+}
+
+/* LESSON MODULE */
+function renderLesson() {
+  const courseKey = (state.profile.course || "Science").toLowerCase().replace(/\s+/g, "_");
+  const langKey = state.lang;
+  const courseLessons = (lessons[courseKey] && lessons[courseKey][langKey]) || lessons.science.en;
+
+  const select = $("lessonTopicSelect");
+  if (select) {
+    select.innerHTML = courseLessons.map((l, i) => `<option value="${i}">${l.title}</option>`).join("");
+    select.onchange = (e) => loadLessonTopic(courseLessons[e.target.value]);
+  }
+  if (courseLessons.length > 0) loadLessonTopic(courseLessons[0]);
+}
+
+function loadLessonTopic(topic) {
+  if ($("lessonHeading")) $("lessonHeading").textContent = topic.title;
+  if ($("lessonSubheading")) $("lessonSubheading").textContent = topic.intro;
+
+  if ($("lessonBody")) {
+    $("lessonBody").innerHTML = topic.blocks.map(b => `<p class="lesson-paragraph">${escapeHtml(b)}</p>`).join("");
+  }
+  if ($("lessonKeywords")) {
+    $("lessonKeywords").innerHTML = topic.keywords.map(k => `<span class="chip">${escapeHtml(k)}</span>`).join("");
+  }
+  if ($("quickCheck") && topic.quiz) {
+    $("quickCheck").innerHTML = `
+      <p><strong>${escapeHtml(topic.quiz.question)}</strong></p>
+      <div class="quiz-options">
+        ${topic.quiz.options.map((opt, i) => `
+          <button class="secondary full small" onclick="checkAnswer(${i}, ${topic.quiz.answer})">${escapeHtml(opt)}</button>
+        `).join("")}
+      </div>
+    `;
+  }
+
+  // Generate initial flashcards for lesson
+  state.cards = topic.blocks.map((b, i) => ({
+    question: `Key concept from ${topic.title} (#${i + 1})`,
+    answer: b
+  }));
+  renderFlashcards();
+}
+
+window.checkAnswer = function(selected, correct) {
+  if (selected === correct) {
+    showToast("Correct! +10 XP", "success");
+    state.profile.xp = (state.profile.xp || 240) + 10;
+    $("xpValue").textContent = state.profile.xp;
+  } else {
+    showToast("Try again!", "error");
+  }
+};
+
+function speakLessonText() {
+  if (!window.speechSynthesis) {
+    showToast("Text-to-speech is not supported on this browser.", "error");
+    return;
+  }
+  window.speechSynthesis.cancel();
+  const text = $("lessonBody")?.textContent;
+  if (!text) return;
+  const utterance = new SpeechSynthesisUtterance(text);
+  utterance.lang = state.lang === "hi" ? "hi-IN" : state.lang === "es" ? "es-ES" : state.lang === "fr" ? "fr-FR" : "en-US";
+  window.speechSynthesis.speak(utterance);
+}
+
+/* COMMUNITY & DOUBT CHAT SYSTEM (WITH DEMO MODE SUPPORT) */
+function setupCommunityChat() {
+  const course = state.profile.course || "Science";
+  if ($("communityCourseBadge")) $("communityCourseBadge").textContent = `${course} Room`;
+
+  if (state.demo || !db) {
+    renderDemoChat("community", course);
+    return;
+  }
+
+  if (communityUnsubscribe) communityUnsubscribe();
+  const q = query(
+    collection(db, "community_chats"),
+    where("course", "==", course),
+    orderBy("createdAt", "asc"),
+    limit(50)
+  );
+
+  communityUnsubscribe = onSnapshot(q, (snapshot) => {
+    const msgs = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+    renderChatMessages("communityMessages", msgs);
   });
 }
 
-function addLessonCards(lesson) {
-  const keywords = lesson.keywords || [];
-  const blocks = lesson.blocks || [];
-  state.cards = [
-    ...keywords.map((word, index) => ({
-      front: `What is ${word}?`,
-      back: blocks.find(block => block.toLowerCase().includes(word.toLowerCase())) || blocks[index % blocks.length] || lesson.title
-    })),
-    ...blocks.map((block, index) => ({
-      front: `Explain lesson point ${index + 1}`,
-      back: block
-    }))
-  ];
-  state.filteredCards = [...state.cards];
-  state.cardIndex = 0;
-  state.cardFlipped = false;
-  renderFlashcard();
-}
+function setupDoubtChat() {
+  const course = state.profile.course || "Science";
+  if ($("roleBadge")) $("roleBadge").textContent = state.profile.role === "teacher" ? "Teacher View" : "Student View";
 
-function renderFlashcard() {
-  const deck = state.filteredCards;
-  $("flashcardCount").textContent = state.cards.length;
-  if (!deck.length) {
-    $("flashcardTextFront").textContent = "No flashcards found.";
-    $("flashcardTextBack").textContent = "Try clearing your search or uploading new material.";
-    $("flashProgress").textContent = "0 / 0";
-    return;
-  }
-  const card = deck[state.cardIndex];
-  $("flashcardTextFront").textContent = card.front;
-  $("flashcardTextBack").textContent = card.back;
-  $("flashProgress").textContent = `${state.cardIndex + 1} / ${deck.length}`;
-
-  const cardElement = $("flashcard");
-  if (state.cardFlipped) cardElement.classList.add("flipped");
-  else cardElement.classList.remove("flipped");
-}
-
-function getPdfJs() {
-  return pdfjsLib || globalThis.pdfjsLib || globalThis["pdfjs-dist/build/pdf"];
-}
-
-async function processPdf(file) {
-  const pdfjs = getPdfJs();
-  if (!pdfjs || typeof pdfjs.getDocument !== "function") {
-    toast("PDF engine did not load. Check internet access, then refresh.");
+  if (state.demo || !db) {
+    renderDemoChat("doubt", course);
     return;
   }
 
-  $("pdfProgressWrap").classList.remove("hidden");
-  $("pdfOutput").classList.add("hidden");
-  $("pdfProgressBar").style.width = "3%";
-  $("pdfProgressText").textContent = "Opening PDF…";
+  if (doubtUnsubscribe) doubtUnsubscribe();
+  const q = query(
+    collection(db, "doubt_chats"),
+    where("course", "==", course),
+    orderBy("createdAt", "asc"),
+    limit(50)
+  );
 
-  try {
-    const buffer = await file.arrayBuffer();
-    const loadingTask = pdfjs.getDocument({ data: new Uint8Array(buffer), disableFontFace: true });
-    const pdf = await loadingTask.promise;
-    const pageLimit = Math.min(pdf.numPages, 100);
-    const pageTexts = [];
-
-    for (let pageNumber = 1; pageNumber <= pageLimit; pageNumber++) {
-      const page = await pdf.getPage(pageNumber);
-      const content = await page.getTextContent();
-      const text = content.items.map(item => item.str).join(" ").replace(/\s+/g, " ").trim();
-      if (text) pageTexts.push(text);
-      const progress = Math.round((pageNumber / pageLimit) * 100);
-      $("pdfProgressBar").style.width = `${progress}%`;
-      $("pdfProgressText").textContent = `Reading page ${pageNumber} of ${pageLimit}…`;
-      await new Promise(resolve => setTimeout(resolve, 0));
-    }
-
-    const fullText = pageTexts.join("\n").replace(/\s+/g, " ").trim();
-    if (fullText.length < 100) {
-      throw new Error("Very little selectable text was found. This may be a scanned-image PDF.");
-    }
-
-    state.pdfText = fullText;
-    const words = fullText.split(/\s+/).filter(Boolean);
-    const sentences = splitSentences(fullText);
-    const noteData = buildScalableNotes(sentences, words.length, pageLimit);
-    const cards = buildPdfCards(noteData.keyPoints, sentences, words.length);
-
-    state.cards = cards;
-    state.filteredCards = [...cards];
-    state.cardIndex = 0;
-    state.cardFlipped = false;
-
-    $("pdfFileName").textContent = file.name;
-    $("pdfPages").textContent = pageLimit;
-    $("pdfWords").textContent = words.length.toLocaleString();
-    $("pdfSummaryCount").textContent = noteData.summary.length;
-    $("pdfCardCount").textContent = cards.length;
-    $("wordsStudied").textContent = words.length.toLocaleString();
-    $("pdfSummary").innerHTML = noteData.summary.map(paragraph => `<p>${safeText(paragraph)}</p>`).join("");
-    $("pdfKeyPoints").innerHTML = noteData.keyPoints.map(point => `<li>${safeText(point)}</li>`).join("");
-
-    renderPdfQuiz(noteData.keyPoints);
-
-    $("pdfOutput").classList.remove("hidden");
-    $("pdfProgressText").textContent = "PDF processed successfully.";
-    renderFlashcard();
-    toast(`Created ${noteData.summary.length} note paragraphs and ${cards.length} flashcards.`);
-  } catch (error) {
-    console.error(error);
-    $("pdfProgressText").textContent = "PDF processing failed.";
-    toast(error.message || "Could not process this PDF.");
-  }
+  doubtUnsubscribe = onSnapshot(q, (snapshot) => {
+    const msgs = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+    renderChatMessages("doubtMessages", msgs);
+  });
 }
 
-function renderPdfQuiz(keyPoints) {
-  if (!keyPoints.length) return;
-  const samplePoint = keyPoints[0];
-  const words = samplePoint.match(/\b[A-Za-z]{4,}\b/g) || ["concept", "definition"];
-  const targetWord = words[0];
-  const maskedSentence = samplePoint.replace(new RegExp(targetWord, "gi"), "_______");
+function renderDemoChat(type, course) {
+  if (!demoChats[type][course]) demoChats[type][course] = [];
+  const container = $(type === "community" ? "communityMessages" : "doubtMessages");
+  if (!container) return;
 
-  $("pdfQuizBox").innerHTML = `
-    <p><strong>Fill in the missing key term:</strong></p>
-    <blockquote class="quiz-sentence">"${safeText(maskedSentence)}"</blockquote>
-    <div class="quiz-input-row">
-      <input id="pdfQuizAnswer" placeholder="Type answer...">
-      <button id="pdfQuizCheckBtn" class="primary">Check</button>
+  container.innerHTML = demoChats[type][course].map(msg => `
+    <div class="message ${msg.sender === state.profile.name ? 'mine' : ''}">
+      <div class="msg-header">
+        <strong>${escapeHtml(msg.sender)}</strong>
+        <span class="badge ${msg.role}">${msg.role}</span>
+        <small>${msg.time}</small>
+      </div>
+      <p>${escapeHtml(msg.text)}</p>
     </div>
-  `;
-
-  $("pdfQuizCheckBtn").addEventListener("click", () => {
-    const val = $("pdfQuizAnswer").value.trim().toLowerCase();
-    if (val === targetWord.toLowerCase()) {
-      toast("Spot on! Correct term.");
-    } else {
-      toast(`Not quite! The word was "${targetWord}".`);
-    }
-  });
-}
-
-function splitSentences(text) {
-  return text
-    .replace(/\s+/g, " ")
-    .split(/(?<=[.!?])\s+(?=[A-Z0-9])/)
-    .map(sentence => sentence.trim())
-    .filter(sentence => sentence.length >= 45 && sentence.length <= 900);
-}
-
-function scoreSentence(sentence, index, total) {
-  const words = sentence.toLowerCase().match(/[a-z]{4,}/g) || [];
-  const unique = new Set(words).size;
-  const positionBonus = index < total * 0.12 ? 5 : 0;
-  const lengthScore = Math.min(sentence.length / 80, 5);
-  const signalWords = /(important|because|therefore|means|defined|result|cause|effect|process|includes|requires|however)/i.test(sentence) ? 4 : 0;
-  return unique * 0.18 + positionBonus + lengthScore + signalWords;
-}
-
-function buildScalableNotes(sentences, wordCount, pageCount) {
-  const desiredPoints = Math.min(60, Math.max(8, Math.ceil(wordCount / 220)));
-  const desiredParagraphs = Math.min(30, Math.max(4, Math.ceil(wordCount / 650)));
-  const ranked = sentences
-    .map((sentence, index) => ({ sentence, index, score: scoreSentence(sentence, index, sentences.length) }))
-    .sort((a, b) => b.score - a.score);
-
-  const selected = [];
-  const seen = new Set();
-  for (const item of ranked) {
-    const signature = item.sentence.toLowerCase().replace(/[^a-z ]/g, "").slice(0, 80);
-    if (!seen.has(signature)) {
-      selected.push(item);
-      seen.add(signature);
-    }
-    if (selected.length >= desiredPoints) break;
-  }
-  selected.sort((a, b) => a.index - b.index);
-  const keyPoints = selected.map(item => item.sentence);
-
-  const paragraphSize = Math.max(2, Math.ceil(keyPoints.length / desiredParagraphs));
-  const summary = [];
-  for (let i = 0; i < keyPoints.length; i += paragraphSize) {
-    summary.push(keyPoints.slice(i, i + paragraphSize).join(" "));
-  }
-  return { summary, keyPoints, pageCount };
-}
-
-function buildPdfCards(keyPoints, sentences, wordCount) {
-  const desired = Math.min(50, Math.max(10, Math.ceil(wordCount / 300)));
-  return keyPoints.slice(0, desired).map((point, index) => {
-    const keywords = point.match(/\b[A-Z][a-z]{3,}\b|\b[a-z]{7,}\b/g) || [];
-    const keyword = keywords[0] || `key point ${index + 1}`;
-    return {
-      front: `What does the document explain about “${keyword}”?`,
-      back: point
-    };
-  });
-}
-
-function localMessages(key) {
-  return JSON.parse(localStorage.getItem(key) || "[]");
-}
-
-function saveLocalMessage(key, message) {
-  const messages = localMessages(key);
-  messages.push(message);
-  localStorage.setItem(key, JSON.stringify(messages.slice(-100)));
-}
-
-function renderMessages(containerId, messages) {
-  const container = $(containerId);
-  container.innerHTML = messages.length ? messages.map(message => {
-    const isMine = message.uid === state.profile.uid || (state.demo && message.uid === "demo-user");
-    const displayName = isMine ? state.profile.name : message.name;
-    const displayRole = isMine ? state.profile.role : (message.role || "student");
-    return `
-    <article class="message ${isMine ? "mine" : ""}">
-      <div class="message-head"><span>${safeText(displayName)} • ${safeText(displayRole)}</span><span>${safeText(message.time || "")}</span></div>
-      <p>${safeText(message.text)}</p>
-    </article>
-  `;}).join("") : `<p class="muted">No messages yet. Start a helpful conversation.</p>`;
+  `).join("");
   container.scrollTop = container.scrollHeight;
 }
 
-function loadChats() {
-  if (communityUnsubscribe) communityUnsubscribe();
-  if (doubtUnsubscribe) doubtUnsubscribe();
+function renderChatMessages(elementId, messages) {
+  const container = $(elementId);
+  if (!container) return;
 
-  if (!firebaseConfigured || !db) {
-    renderMessages("communityMessages", localMessages(`community-${state.profile.course}`));
-    renderMessages("doubtMessages", localMessages(`doubts-${state.profile.course}`));
-    return;
-  }
-
-  const communityQuery = query(
-    collection(db, "communityMessages"),
-    where("course", "==", state.profile.course),
-    orderBy("createdAt", "asc"),
-    limit(100)
-  );
-  communityUnsubscribe = onSnapshot(communityQuery, snapshot => {
-    renderMessages("communityMessages", snapshot.docs.map(item => {
-      const data = item.data();
-      return { ...data, time: data.createdAt?.toDate?.().toLocaleTimeString([], {hour:"2-digit",minute:"2-digit"}) || "" };
-    }));
-  }, error => {
-    console.error(error);
-    toast("Community chat needs its Firestore index/rules configured.");
-  });
-
-  const doubtQuery = query(
-    collection(db, "doubtMessages"),
-    where("course", "==", state.profile.course),
-    orderBy("createdAt", "asc"),
-    limit(100)
-  );
-  doubtUnsubscribe = onSnapshot(doubtQuery, snapshot => {
-    const messages = snapshot.docs.map(item => {
-      const data = item.data();
-      return { ...data, time: data.createdAt?.toDate?.().toLocaleTimeString([], {hour:"2-digit",minute:"2-digit"}) || "" };
-    }).filter(message => state.profile.role === "teacher" || message.studentUid === state.profile.uid || message.replyToUid === state.profile.uid);
-    renderMessages("doubtMessages", messages);
-  }, error => {
-    console.error(error);
-    toast("Doubt chat needs its Firestore index/rules configured.");
-  });
+  container.innerHTML = messages.map(msg => `
+    <div class="message ${msg.sender === state.profile.name ? 'mine' : ''}">
+      <div class="msg-header">
+        <strong>${escapeHtml(msg.sender)}</strong>
+        <span class="badge ${msg.role}">${msg.role}</span>
+      </div>
+      <p>${escapeHtml(msg.text)}</p>
+    </div>
+  `).join("");
+  container.scrollTop = container.scrollHeight;
 }
 
-async function sendChat(type, text) {
-  const base = {
-    text,
-    uid: state.profile.uid,
-    name: state.profile.name,
-    role: state.profile.role,
-    course: state.profile.course
-  };
+async function handleCommunitySubmit(e) {
+  e.preventDefault();
+  const input = $("communityInput");
+  const text = input.value.trim();
+  if (!text) return;
+  const course = state.profile.course || "Science";
 
-  if (!firebaseConfigured || !db) {
-    const key = type === "community" ? `community-${state.profile.course}` : `doubts-${state.profile.course}`;
-    saveLocalMessage(key, { ...base, studentUid: state.profile.role === "student" ? state.profile.uid : "demo-student", time: new Date().toLocaleTimeString([], {hour:"2-digit",minute:"2-digit"}) });
-    loadChats();
+  if (state.demo || !db) {
+    if (!demoChats.community[course]) demoChats.community[course] = [];
+    demoChats.community[course].push({
+      id: Date.now().toString(),
+      sender: state.profile.name,
+      role: state.profile.role,
+      text: text,
+      time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+    });
+    renderDemoChat("community", course);
+    input.value = "";
     return;
   }
 
-  if (type === "community") {
-    await addDoc(collection(db, "communityMessages"), { ...base, createdAt: serverTimestamp() });
-  } else {
-    await addDoc(collection(db, "doubtMessages"), {
-      ...base,
-      studentUid: state.profile.role === "student" ? state.profile.uid : null,
-      replyToUid: state.profile.role === "teacher" ? "course-students" : null,
+  try {
+    await addDoc(collection(db, "community_chats"), {
+      course,
+      sender: state.profile.name,
+      role: state.profile.role,
+      text,
       createdAt: serverTimestamp()
     });
+    input.value = "";
+  } catch (err) {
+    showToast("Failed to send message", "error");
   }
 }
 
-function renderTasks() {
-  $("taskList").innerHTML = state.tasks.length ? state.tasks.map(task => `
-    <article class="task-item ${task.done ? "done" : ""}">
-      <input type="checkbox" data-task-check="${task.id}" ${task.done ? "checked" : ""} aria-label="Mark task complete">
-      <div><b>${safeText(task.text)}</b><small>${safeText(task.date || "No deadline")}</small></div>
-      <button data-task-delete="${task.id}" aria-label="Delete task">Delete</button>
-    </article>
-  `).join("") : `<p class="muted">No tasks yet. Add your first study target.</p>`;
+async function handleDoubtSubmit(e) {
+  e.preventDefault();
+  const input = $("doubtInput");
+  const text = input.value.trim();
+  if (!text) return;
+  const course = state.profile.course || "Science";
 
-  $("completedTasks").textContent = state.tasks.filter(task => task.done).length;
-  $$("[data-task-check]").forEach(box => box.addEventListener("change", () => {
-    const task = state.tasks.find(item => item.id === box.dataset.taskCheck);
-    if (task) task.done = box.checked;
-    persistTasks();
-  }));
-  $$("[data-task-delete]").forEach(button => button.addEventListener("click", () => {
-    state.tasks = state.tasks.filter(item => item.id !== button.dataset.taskDelete);
-    persistTasks();
-  }));
+  if (state.demo || !db) {
+    if (!demoChats.doubt[course]) demoChats.doubt[course] = [];
+    demoChats.doubt[course].push({
+      id: Date.now().toString(),
+      sender: state.profile.name,
+      role: state.profile.role,
+      text: text,
+      time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+    });
+    renderDemoChat("doubt", course);
+    input.value = "";
+    return;
+  }
+
+  try {
+    await addDoc(collection(db, "doubt_chats"), {
+      course,
+      sender: state.profile.name,
+      role: state.profile.role,
+      text,
+      createdAt: serverTimestamp()
+    });
+    input.value = "";
+  } catch (err) {
+    showToast("Failed to send doubt", "error");
+  }
 }
 
-function persistTasks() {
+/* PDF STUDIO MODULE */
+async function processPdfFile(file) {
+  if (!file || file.type !== "application/pdf") {
+    showToast("Please upload a valid PDF document.", "error");
+    return;
+  }
+
+  const wrap = $("pdfProgressWrap");
+  const bar = $("pdfProgressBar");
+  const text = $("pdfProgressText");
+
+  wrap?.classList.remove("hidden");
+  if (bar) bar.style.width = "20%";
+  if (text) text.textContent = "Reading PDF content...";
+
+  try {
+    const arrayBuffer = await file.arrayBuffer();
+    const pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
+    let extractedText = "";
+
+    for (let i = 1; i <= pdf.numPages; i++) {
+      const page = await pdf.getPage(i);
+      const content = await page.getTextContent();
+      const pageText = content.items.map(item => item.str).join(" ");
+      extractedText += pageText + "\n";
+      if (bar) bar.style.width = `${Math.round((i / pdf.numPages) * 80) + 20}%`;
+    }
+
+    state.pdfText = extractedText.trim();
+    const words = state.pdfText.split(/\s+/).filter(Boolean);
+    state.wordsStudiedCount += words.length;
+
+    if ($("wordsStudied")) $("wordsStudied").textContent = state.wordsStudiedCount;
+    if ($("pdfPages")) $("pdfPages").textContent = pdf.numPages;
+    if ($("pdfWords")) $("pdfWords").textContent = words.length;
+    if ($("pdfFileName")) $("pdfFileName").textContent = file.name;
+
+    generatePdfNotes(extractedText);
+    wrap?.classList.add("hidden");
+    $("pdfOutput")?.classList.remove("hidden");
+    showToast("PDF parsed successfully! +30 XP", "success");
+    state.profile.xp = (state.profile.xp || 240) + 30;
+    if ($("xpValue")) $("xpValue").textContent = state.profile.xp;
+
+  } catch (err) {
+    console.error("PDF Processing Error:", err);
+    wrap?.classList.add("hidden");
+    showToast("Failed to extract text from PDF.", "error");
+  }
+}
+
+function generatePdfNotes(text) {
+  const sentences = text.match(/[^.!?]+[.!?]+/g) || [text];
+  const summaryParagraphs = [];
+  
+  for (let i = 0; i < sentences.length; i += 4) {
+    summaryParagraphs.push(sentences.slice(i, i + 4).join(" "));
+  }
+
+  if ($("pdfSummary")) {
+    $("pdfSummary").innerHTML = summaryParagraphs.map(p => `<p>${escapeHtml(p)}</p>`).join("");
+  }
+  if ($("pdfSummaryCount")) $("pdfSummaryCount").textContent = summaryParagraphs.length;
+
+  const keyPoints = sentences.filter(s => s.length > 30).slice(0, 6);
+  if ($("pdfKeyPoints")) {
+    $("pdfKeyPoints").innerHTML = keyPoints.map(k => `<li>${escapeHtml(k.trim())}</li>`).join("");
+  }
+
+  // Create flashcards from PDF keypoints
+  const newCards = keyPoints.map((kp, i) => ({
+    question: `Key Concept #${i + 1}`,
+    answer: kp.trim()
+  }));
+
+  state.cards = newCards;
+  if ($("pdfCardCount")) $("pdfCardCount").textContent = newCards.length;
+  renderFlashcards();
+}
+
+/* FLASHCARDS MODULE */
+function renderFlashcards() {
+  state.filteredCards = state.cards.length > 0 ? [...state.cards] : [
+    { question: "Open a lesson or upload a PDF to create cards.", answer: "Cards will be dynamically generated!" }
+  ];
+  state.cardIndex = 0;
+  state.cardFlipped = false;
+  updateCardDisplay();
+  if ($("flashcardCount")) $("flashcardCount").textContent = state.cards.length;
+}
+
+function updateCardDisplay() {
+  const card = state.filteredCards[state.cardIndex];
+  const flashcardEl = $("flashcard");
+
+  if (flashcardEl) flashcardEl.classList.remove("flipped");
+  state.cardFlipped = false;
+
+  if (card) {
+    if ($("flashcardTextFront")) $("flashcardTextFront").textContent = card.question;
+    if ($("flashcardTextBack")) $("flashcardTextBack").textContent = card.answer;
+    if ($("flashProgress")) $("flashProgress").textContent = `${state.cardIndex + 1} / ${state.filteredCards.length}`;
+  }
+}
+
+function navigateCard(direction) {
+  if (state.filteredCards.length === 0) return;
+  state.cardIndex = (state.cardIndex + direction + state.filteredCards.length) % state.filteredCards.length;
+  updateCardDisplay();
+}
+
+function shuffleCards() {
+  for (let i = state.filteredCards.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [state.filteredCards[i], state.filteredCards[j]] = [state.filteredCards[j], state.filteredCards[i]];
+  }
+  state.cardIndex = 0;
+  updateCardDisplay();
+  showToast("Flashcards shuffled", "info");
+}
+
+function filterFlashcards(queryStr) {
+  const q = queryStr.toLowerCase();
+  state.filteredCards = state.cards.filter(c => c.question.toLowerCase().includes(q) || c.answer.toLowerCase().includes(q));
+  state.cardIndex = 0;
+  updateCardDisplay();
+}
+
+/* STUDY PLANNER MODULE */
+function handleTaskAdd(e) {
+  e.preventDefault();
+  const input = $("taskInput");
+  const dateInput = $("taskDate");
+  const text = input.value.trim();
+  if (!text) return;
+
+  const newTask = {
+    id: Date.now().toString(),
+    title: text,
+    date: dateInput.value || "Today",
+    completed: false
+  };
+
+  state.tasks.push(newTask);
+  savePlannerTasks();
+  renderPlannerTasks();
+  input.value = "";
+  dateInput.value = "";
+  showToast("Task added!", "success");
+}
+
+function renderPlannerTasks() {
+  const container = $("taskList");
+  if (!container) return;
+
+  if (state.tasks.length === 0) {
+    container.innerHTML = `<p class="muted">No tasks added yet. Add your first study task above!</p>`;
+    return;
+  }
+
+  container.innerHTML = state.tasks.map(t => `
+    <div class="task-item ${t.completed ? 'completed' : ''}">
+      <label>
+        <input type="checkbox" ${t.completed ? 'checked' : ''} onchange="toggleTask('${t.id}')">
+        <span>${escapeHtml(t.title)}</span>
+      </label>
+      <small class="muted">${t.date}</small>
+      <button class="icon-button danger" onclick="deleteTask('${t.id}')">✕</button>
+    </div>
+  `).join("");
+
+  const completedCount = state.tasks.filter(t => t.completed).length;
+  if ($("completedTasks")) $("completedTasks").textContent = completedCount;
+}
+
+window.toggleTask = function(id) {
+  const task = state.tasks.find(t => t.id === id);
+  if (task) {
+    task.completed = !task.completed;
+    savePlannerTasks();
+    renderPlannerTasks();
+  }
+};
+
+window.deleteTask = function(id) {
+  state.tasks = state.tasks.filter(t => t.id !== id);
+  savePlannerTasks();
+  renderPlannerTasks();
+};
+
+function savePlannerTasks() {
   localStorage.setItem("equaleduTasks", JSON.stringify(state.tasks));
-  renderTasks();
 }
 
-function updateTimer() {
-  const minutes = Math.floor(state.timerSeconds / 60).toString().padStart(2, "0");
-  const seconds = (state.timerSeconds % 60).toString().padStart(2, "0");
-  $("timerDisplay").textContent = `${minutes}:${seconds}`;
+/* FOCUS TIMER MODULE */
+function startTimer() {
+  if (state.timerId) return;
+  state.timerId = setInterval(() => {
+    if (state.timerSeconds > 0) {
+      state.timerSeconds--;
+      updateTimerDisplay();
+    } else {
+      pauseTimer();
+      showToast("Focus sprint complete! Great job!", "success");
+      state.profile.xp = (state.profile.xp || 240) + 20;
+      if ($("xpValue")) $("xpValue").textContent = state.profile.xp;
+    }
+  }, 1000);
 }
 
-function bindEvents() {
-  $("authForm").addEventListener("submit", handleAuthSubmit);
-  $("authSwitch").addEventListener("click", () => setAuthMode(state.authMode === "signup" ? "signin" : "signup"));
-  $("demoLogin").addEventListener("click", () => {
-    state.demo = true;
-    loadDemoProfile();
-    showApp();
-    toast("Demo mode opened. Chats are stored on this device.");
-  });
-
-  $$(".nav-btn").forEach(button => button.addEventListener("click", () => openPage(button.dataset.page)));
-  $$("[data-open-page]").forEach(button => button.addEventListener("click", () => openPage(button.dataset.openPage)));
-
-  $("logoutBtn").addEventListener("click", async () => {
-    if (auth && auth.currentUser) await signOut(auth);
-    showAuth();
-  });
-
-  $("editProfileBtn").addEventListener("click", () => $("profileDialog").showModal());
-  $("profileShortcut").addEventListener("click", () => $("profileDialog").showModal());
-  $("changeCourseBtn").addEventListener("click", () => $("courseDialog").showModal());
-  $("a11yBtn").addEventListener("click", () => $("a11yDialog").showModal());
-  $$("[data-close-dialog]").forEach(button => button.addEventListener("click", () => $(button.dataset.closeDialog).close()));
-
-  $("a11yForm").addEventListener("submit", event => {
-    event.preventDefault();
-    const lang = $("langSelect").value;
-    applyLanguage(lang);
-
-    const fontFamily = $("fontFamilySelect").value;
-    document.documentElement.style.setProperty("--primary-font", `'${fontFamily}', sans-serif`);
-
-    const fontSize = $("fontSizeSelect").value;
-    document.documentElement.style.setProperty("--base-font-size", fontSize);
-
-    const dyslexia = $("toggleDyslexia").checked;
-    document.body.classList.toggle("dyslexia-mode", dyslexia);
-
-    const readingGuide = $("toggleReadingGuide").checked;
-    $("readingGuide").classList.toggle("hidden", !readingGuide);
-
-    const highContrast = $("toggleHighContrast").checked;
-    document.body.classList.toggle("high-contrast", highContrast);
-
-    $("a11yDialog").close();
-    toast("Accessibility and view settings applied!");
-  });
-
-  window.addEventListener("mousemove", e => {
-    const guide = $("readingGuide");
-    if (!guide.classList.contains("hidden")) {
-      guide.style.top = `${e.clientY - 17}px`;
-    }
-  });
-
-  $("profileForm").addEventListener("submit", async event => {
-    event.preventDefault();
-    state.profile.name = $("profileName").value.trim();
-    state.profile.role = $("profileRole").value;
-    state.profile.bio = $("profileBio").value.trim();
-    saveProfileLocal();
-    
-    ["Science", "Mathematics", "Social Science", "English", "Computer Science", "Environmental Studies"].forEach(course => {
-      ["community-", "doubts-"].forEach(prefix => {
-        const key = `${prefix}${course}`;
-        const msgs = localMessages(key).map(m => (m.uid === state.profile.uid || (state.demo && m.uid === "demo-user")) ? { ...m, name: state.profile.name, role: state.profile.role } : m);
-        localStorage.setItem(key, JSON.stringify(msgs));
-      });
-    });
-
-    if (firebaseConfigured && db && auth?.currentUser) {
-      await updateDoc(doc(db, "users", auth.currentUser.uid), {
-        name: state.profile.name, role: state.profile.role, bio: state.profile.bio
-      });
-      await updateProfile(auth.currentUser, { displayName: state.profile.name });
-    }
-    updateProfileUI();
-    loadChats();
-    $("profileDialog").close();
-    toast("Profile updated.");
-  });
-
-  $("courseForm").addEventListener("submit", async event => {
-    event.preventDefault();
-    state.profile.course = $("courseSelect").value;
-    saveProfileLocal();
-    if (firebaseConfigured && db && auth?.currentUser) {
-      await updateDoc(doc(db, "users", auth.currentUser.uid), { course: state.profile.course });
-    }
-    updateProfileUI();
-    renderLessonTopics();
-    renderLesson();
-    loadChats();
-    $("courseDialog").close();
-    toast(`Course changed to ${state.profile.course}.`);
-  });
-
-  $("lessonTopicSelect").addEventListener("change", renderLesson);
-
-  $("speakLessonBtn").addEventListener("click", () => {
-    speechSynthesis.cancel();
-    const text = $("lessonBody").innerText;
-    const utterance = new SpeechSynthesisUtterance(text);
-    speechSynthesis.speak(utterance);
-    toast("Reading lesson...");
-  });
-
-  $("pauseAudioBtn").addEventListener("click", () => {
-    if (speechSynthesis.speaking && !speechSynthesis.paused) {
-      speechSynthesis.pause();
-      toast("Audio paused.");
-    } else if (speechSynthesis.paused) {
-      speechSynthesis.resume();
-      toast("Audio resumed.");
-    }
-  });
-
-  $("stopAudioBtn").addEventListener("click", () => {
-    speechSynthesis.cancel();
-    toast("Audio stopped.");
-  });
-
-  const dropzone = $("pdfDropzone");
-  $("pdfInput").addEventListener("change", event => processPdf(event.target.files[0]));
-  ["dragenter", "dragover"].forEach(type => dropzone.addEventListener(type, event => {
-    event.preventDefault(); dropzone.classList.add("drag");
-  }));
-  ["dragleave", "drop"].forEach(type => dropzone.addEventListener(type, event => {
-    event.preventDefault(); dropzone.classList.remove("drag");
-  }));
-  dropzone.addEventListener("drop", event => {
-    const file = event.dataTransfer.files[0];
-    if (file?.type === "application/pdf" || file?.name.toLowerCase().endsWith(".pdf")) processPdf(file);
-    else toast("Please choose a PDF file.");
-  });
-
-  $("copyNotesBtn").addEventListener("click", async () => {
-    await navigator.clipboard.writeText($("pdfSummary").innerText);
-    toast("Notes copied.");
-  });
-
-  $("downloadNotesBtn").addEventListener("click", () => {
-    const blob = new Blob([$("pdfSummary").innerText], { type: "text/plain" });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = `${$("pdfFileName").textContent}_Summary.txt`;
-    a.click();
-    URL.revokeObjectURL(url);
-    toast("Notes exported!");
-  });
-
-  $("flashcardContainer").addEventListener("click", () => {
-    state.cardFlipped = !state.cardFlipped;
-    renderFlashcard();
-  });
-
-  $("flashcardSearch").addEventListener("input", e => {
-    const query = e.target.value.toLowerCase();
-    state.filteredCards = state.cards.filter(c =>
-      c.front.toLowerCase().includes(query) || c.back.toLowerCase().includes(query)
-    );
-    state.cardIndex = 0;
-    state.cardFlipped = false;
-    renderFlashcard();
-  });
-
-  $("nextCardBtn").addEventListener("click", () => {
-    if (!state.filteredCards.length) return;
-    state.cardIndex = (state.cardIndex + 1) % state.filteredCards.length;
-    state.cardFlipped = false;
-    renderFlashcard();
-  });
-
-  $("prevCardBtn").addEventListener("click", () => {
-    if (!state.filteredCards.length) return;
-    state.cardIndex = (state.cardIndex - 1 + state.filteredCards.length) % state.filteredCards.length;
-    state.cardFlipped = false;
-    renderFlashcard();
-  });
-
-  $("shuffleCardsBtn").addEventListener("click", () => {
-    for (let i = state.filteredCards.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [state.filteredCards[i], state.filteredCards[j]] = [state.filteredCards[j], state.filteredCards[i]];
-    }
-    state.cardIndex = 0; state.cardFlipped = false; renderFlashcard();
-    toast("Flashcards shuffled.");
-  });
-
-  $("resetCardsBtn").addEventListener("click", () => {
-    state.filteredCards = [...state.cards];
-    $("flashcardSearch").value = "";
-    state.cardIndex = 0;
-    state.cardFlipped = false;
-    renderFlashcard();
-    toast("Flashcards reset.");
-  });
-
-  $("communityForm").addEventListener("submit", async event => {
-    event.preventDefault();
-    const input = $("communityInput");
-    await sendChat("community", input.value.trim());
-    input.value = "";
-  });
-
-  $("doubtForm").addEventListener("submit", async event => {
-    event.preventDefault();
-    const input = $("doubtInput");
-    await sendChat("doubt", input.value.trim());
-    input.value = "";
-  });
-
-  $("taskForm").addEventListener("submit", event => {
-    event.preventDefault();
-    state.tasks.unshift({ id: crypto.randomUUID(), text: $("taskInput").value.trim(), date: $("taskDate").value, done: false });
-    $("taskInput").value = ""; $("taskDate").value = ""; persistTasks();
-  });
-
-  $("timerStart").addEventListener("click", () => {
-    if (state.timerId) return;
-    state.timerId = setInterval(() => {
-      state.timerSeconds -= 1;
-      updateTimer();
-      if (state.timerSeconds <= 0) {
-        clearInterval(state.timerId); state.timerId = null; state.timerSeconds = 1500; updateTimer();
-        toast("Focus sprint complete!");
-      }
-    }, 1000);
-  });
-
-  $("timerPause").addEventListener("click", () => {
-    if (state.timerId) {
-      clearInterval(state.timerId);
-      state.timerId = null;
-      toast("Timer paused.");
-    }
-  });
-
-  $("timerReset").addEventListener("click", () => {
-    clearInterval(state.timerId); state.timerId = null; state.timerSeconds = 1500; updateTimer();
-  });
-
-  $("themeBtn").addEventListener("click", () => {
-    const active = document.body.classList.toggle("dark");
-    $("themeBtn").setAttribute("aria-pressed", String(active));
-    localStorage.setItem("equaleduDark", String(active));
-  });
-
-  $("focusModeBtn").addEventListener("click", () => {
-    document.body.classList.add("focus-mode");
-    $("focusModeBtn").setAttribute("aria-pressed", "true");
-    toast("Focus mode enabled. Click 'Exit Focus Mode' at top right to return.");
-  });
-
-  $("exitFocusBtn").addEventListener("click", () => {
-    document.body.classList.remove("focus-mode");
-    $("focusModeBtn").setAttribute("aria-pressed", "false");
-    toast("Exited focus mode.");
-  });
-}
-
-async function init() {
-  bindEvents();
-  setAuthMode("signup");
-  updateTimer();
-  applyLanguage(state.lang);
-  $("langSelect").value = state.lang;
-
-  if (localStorage.getItem("equaleduDark") === "true") document.body.classList.add("dark");
-  $("firebaseStatus").textContent = firebaseConfigured
-    ? "Firebase detected. Create an account or sign in."
-    : "Firebase is not configured yet. Demo mode is fully usable.";
-
-  if (firebaseConfigured && auth && db) {
-    onAuthStateChanged(auth, async user => {
-      if (!user) {
-        showAuth();
-        return;
-      }
-      state.user = user;
-      state.demo = false;
-      await loadFirebaseProfile(user);
-      showApp();
-    });
-  } else {
-    showAuth();
+function pauseTimer() {
+  if (state.timerId) {
+    clearInterval(state.timerId);
+    state.timerId = null;
   }
 }
 
+function resetTimer() {
+  pauseTimer();
+  state.timerSeconds = 1500;
+  updateTimerDisplay();
+}
+
+function updateTimerDisplay() {
+  const minutes = Math.floor(state.timerSeconds / 60);
+  const seconds = state.timerSeconds % 60;
+  if ($("timerDisplay")) {
+    $("timerDisplay").textContent = `${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`;
+  }
+}
+
+/* ACCESSIBILITY & THEMES */
+function toggleFocusMode() {
+  document.body.classList.toggle("focus-mode");
+  showToast(document.body.classList.contains("focus-mode") ? "Focus mode activated" : "Focus mode deactivated", "info");
+}
+
+function toggleDarkMode() {
+  document.body.classList.toggle("dark-theme");
+}
+
+function handleA11ySave(e) {
+  e.preventDefault();
+  const lang = $("langSelect").value;
+  const font = $("fontFamilySelect").value;
+  const size = $("fontSizeSelect").value;
+  const dyslexia = $("toggleDyslexia").checked;
+  const guide = $("toggleReadingGuide").checked;
+  const contrast = $("toggleHighContrast").checked;
+
+  state.lang = lang;
+  localStorage.setItem("equaleduLang", lang);
+  applyLanguage(lang);
+
+  document.body.style.fontFamily = font;
+  document.body.style.fontSize = size;
+  document.body.classList.toggle("dyslexia-mode", dyslexia);
+  document.body.classList.toggle("high-contrast", contrast);
+
+  const guideEl = $("readingGuide");
+  if (guideEl) guideEl.classList.toggle("hidden", !guide);
+
+  closeDialog("a11yDialog");
+  showToast("Display preferences applied", "success");
+}
+
+function applyLanguage(lang) {
+  const dict = translations[lang] || translations.en;
+  $$("[data-i18n]").forEach(el => {
+    const key = el.getAttribute("data-i18n");
+    if (dict[key]) el.textContent = dict[key];
+  });
+}
 init().catch(error => {
   console.error(error);
   toast("The app could not start. Check the browser console.");
